@@ -1,160 +1,145 @@
 # 🚀 Herramientas Rápidas de Diagnóstico - Batch Script
 
 ![Windows Batch](https://img.shields.io/badge/Windows-Batch-blue)
-![Administrador requerido](https://img.shields.io/badge/Admin-Required-red)
-![Versión](https://img.shields.io/badge/Versión-1.0-green)
+![Administrador requerido](https://img.shields.io/badge/Admin-Recommended-orange)
+![Versión](https://img.shields.io/badge/Versión-2.0-green)
 
-Un script Batch para Windows que centraliza las herramientas de diagnóstico más comunes en un solo menú interactivo. Ideal para administradores de sistemas, soporte técnico y usuarios avanzados.
+Script Batch todo-en-uno para diagnóstico y solución de problemas en Windows. Incluye **14 herramientas esenciales** con menú interactivo.
 
-## 📋 Características
+## ✨ Nuevas Funcionalidades (v2.0)
 
-- **Menú interactivo** con navegación por números
-- **Acceso rápido** a 10+ herramientas de diagnóstico
-- **Sin archivos de log** - Ejecución directa en consola
-- **Modo "todas"** para un diagnóstico rápido básico
-- **Submenús contextuales** para operaciones complejas
+✅ **Renovación de IP DHCP** - Libera y renueva dirección IP automáticamente  
+✅ **Limpieza de cache DNS** - Flush DNS completo + navegadores  
+✅ **Submenús mejorados** - Más opciones y control
 
-## 🛠️ Herramientas Incluidas
+## 🛠️ Herramientas Completas
 
-| Número | Comando | Función |
-|--------|---------|---------|
+| # | Comando | Función |
+|---|---------|---------|
 | 1 | `ipconfig /all` | Información completa de red |
 | 2 | `ping` | Prueba de conectividad |
-| 3 | `netstat -an` | Conexiones y puertos activos |
-| 4 | `sfc /scannow` | Verificador de archivos del sistema |
+| 3 | `netstat -an` | Conexiones y puertos |
+| 4 | `sfc /scannow` | Verificador de archivos sistema |
 | 5 | `chkdsk C: /scan` | Análisis de disco |
 | 6 | `tasklist / taskkill` | Gestión de procesos |
 | 7 | `systeminfo` | Información del sistema |
 | 8 | `shutdown` | Apagado/Reinicio |
 | 9 | `nslookup` | Diagnóstico DNS |
-| 10 | `net use` | Recursos de red compartidos |
-| 11 | **TODAS** | Ejecución rápida de herramientas básicas |
+| 10 | `net use` | Recursos de red |
+| 11 | **`ipconfig /release /renew`** | **Renovar IP DHCP** |
+| 12 | **`ipconfig /flushdns`** | **Limpiar cache DNS** |
+| 13 | **TODAS** | Ejecución rápida combinada |
 
-## 📥 Instalación
+## 🔧 Opciones de Red Avanzadas
 
-1. **Clonar o descargar:**
+### 🔄 Renovar IP (Opción 11)
+```
+1. Liberar y renovar IP (DHCP completo)
+2. Solo liberar IP
+3. Solo renovar IP  
+4. Ver IP antes/después
+```
+
+### 🧹 Limpiar DNS (Opción 12)
+```
+1. Limpiar cache DNS completo
+2. Registrar DNS de nuevo
+3. Limpiar y registrar
+4. Mostrar cache DNS actual
+5. Limpiar cache de Chrome/Edge
+```
+
+## 🚀 Uso Rápido
+
+```powershell
+# Como administrador (recomendado)
+Start-Process "diagnostico.bat" -Verb RunAs
+
+# O navegar al menú principal:
+1. Ejecutar .bat
+2. Teclear número de opción (1-14)
+3. Seguir instrucciones en pantalla
+```
+
+## 💡 Casos de Uso Comunes
+
+### 🔧 Problemas de conexión a Internet:
+```
+1. Opción 12 → Limpiar DNS (1 o 3)
+2. Opción 11 → Renovar IP (1)
+3. Opción 2 → Probar conectividad
+```
+
+### 🖥️ Equipo lento o con errores:
+```
+1. Opción 6 → Ver/cerrar procesos
+2. Opción 4 → SFC scannow
+3. Opción 5 → CHKDSK
+```
+
+### 🌐 Problemas de red/dominios:
+```
+1. Opción 9 → NSLookup diagnóstico
+2. Opción 12 → Flush DNS
+3. Opción 3 → Ver conexiones activas
+```
+
+## ⚡ Características Técnicas
+
+- **Zero-logs**: No genera archivos de registro
+- **Auto-retorno**: Regresa al menú automáticamente
+- **Validación**: Manejo de errores básico
+- **UTF-8**: Soporte para caracteres especiales
+- **Multi-nivel**: Submenús para funciones complejas
+
+## 📦 Instalación en 2 Pasos
+
+1. **Descargar:**
    ```bash
    git clone https://github.com/KevinGil12C/herramienta_bat.git
    ```
 
-2. **O descargar manualmente:**
-   - Haz clic en `diagnostico.bat`
-   - "Guardar como" → `diagnostico.bat`
+2. **Ejecutar como admin:**
+   ```powershell
+   # Botón derecho → "Ejecutar como administrador"
+   # O desde línea de comandos:
+   diagnostico.bat
+   ```
 
-3. **Ubicación:**
-   - Puedes colocar el archivo en cualquier carpeta
-   - Recomendado: `C:\Herramientas\` o en el escritorio
+## 🐛 Solución de Problemas Comunes
 
-## 🚀 Uso
-
-### Ejecución Normal
-```bash
-# Doble clic en el archivo .bat
-# O desde cmd/powershell:
-diagnostico.bat
-```
-
-### Ejecución como Administrador (Recomendado)
-```powershell
-# Botón derecho → "Ejecutar como administrador"
-# O desde PowerShell:
-Start-Process "diagnostico.bat" -Verb RunAs
-```
-
-### Ejemplo de Flujo
-```
-1. Ejecuta diagnostico.bat como administrador
-2. Selecciona opción "6" para gestión de procesos
-3. Dentro del submenú, elige "1" para listar procesos
-4. Presiona cualquier tecla para volver al menú
-```
-
-## ⚠️ Permisos Requeridos
-
-Algunas funciones necesitan privilegios de administrador:
-
-| Función | Admin Requerido | Razón |
-|---------|----------------|-------|
-| `sfc /scannow` | ✅ Sí | Modifica archivos del sistema |
-| `chkdsk` | ✅ Sí | Acceso a disco a bajo nivel |
-| `shutdown` | ✅ Sí | Control del sistema |
-| `taskkill` | ⚠️ A veces | Para procesos del sistema |
-| Otras herramientas | ❌ No | Solo lectura |
-
-## 🔧 Personalización
-
-### Variables Editables (dentro del script):
-```batch
-set "ping_target=google.com"       # Cambiar servidor de prueba
-set "shared_folder=\\SERVIDOR\..." # Ruta predeterminada recursos
-set "drive_letter=Z:"              # Unidad para mapear
-```
-
-### Añadir Nuevas Herramientas:
-```batch
-# Agregar en la sección de menú:
-echo 13. Nueva Herramienta
-
-# Agregar condición:
-if "%opcion%"=="13" goto nueva_herramienta
-
-# Crear nueva etiqueta:
-:nueva_herramienta
-cls
-echo ========== NUEVA HERRAMIENTA ==========
-# Tu comando aquí
-pause
-goto menu
-```
-
-## 🐛 Solución de Problemas
-
-### Problema: "El acceso ha sido denegado"
-**Solución:** Ejecutar como administrador
-
-### Problema: Comandos no reconocidos
-**Solución:** Verificar que estás en Windows y cmd.exe
-
-### Problema: SFC tarda mucho
-**Solución:** Es normal, puede tomar 10-30 minutos
-
-### Problema: Script se cierra inmediatamente
-**Solución:** Ejecutar desde cmd o agregar `pause` al final
-
-## 📝 Notas Importantes
-
-1. **SFC /scannow** puede requerir el DVD de Windows para reparar
-2. **CHKDSK** necesita acceso exclusivo al disco
-3. **Taskkill** puede causar pérdida de datos si mata procesos críticos
-4. El script no modifica archivos excepto cuando ejecutas SFC/CHKDSK
-5. Siempre guarda tu trabajo antes de usar opciones de apagado
+| Problema | Solución |
+|----------|----------|
+| "Acceso denegado" | Ejecutar como administrador |
+| Script se cierra | Ejecutar desde CMD/PowerShell |
+| SFC tarda mucho | Es normal (10-30 min) |
+| No cambia IP | Reiniciar servicio DHCP o router |
 
 ## 🤝 Contribuir
 
-1. Haz fork del proyecto
-2. Crea tu rama: `git checkout -b nueva-funcionalidad`
-3. Commit cambios: `git commit -m 'Agrega X funcionalidad'`
-4. Push a la rama: `git push origin nueva-funcionalidad`
-5. Abre un Pull Request
+¿Tienes una herramienta útil para añadir?
+1. Fork el repositorio
+2. Añade tu función en el menú
+3. Mantén el formato consistente
+4. Envía Pull Request
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia MIT. Ver archivo `LICENSE` para más detalles.
+MIT License - Ver [LICENSE](LICENSE) para detalles.
 
-## ⭐ Mostrar tu apoyo
+## ⭐ Apoyo
 
-Si te resultó útil, ¡dale una estrella al repositorio!
-
-## 👨‍💻 Autor
-
-**Dev Kevscl**
-- GitHub: [@KevinGil12C](https://github.com/KevinGil12C)
-
+Si te ayuda en tu trabajo, ¡dale una estrella! ⭐
 
 ---
 
-**⚠️ Descargo de responsabilidad:** Este script es para fines educativos y de diagnóstico. El autor no se hace responsable por daños en el sistema. Usa bajo tu propio riesgo.
-
----
+**⚠️ Nota:** Siempre guarda tu trabajo antes de usar opciones de apagado o cerrar procesos.
 
 *Última actualización: $(date +%Y-%m-%d)*
+```
+
+Estas nuevas opciones (11 y 12) son especialmente útiles para:
+- **Renovar IP**: Soluciona problemas de conexión cuando el DHCP falla
+- **Limpiar DNS**: Arregla problemas de resolución de nombres y dominios
+
+¡Script completo y listo para usar! 🚀
