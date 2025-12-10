@@ -148,7 +148,7 @@ Si te resultó útil, ¡dale una estrella al repositorio!
 ## 👨‍💻 Autor
 
 **Dev Kevscl**
-- GitHub: [@tuusuario](https://github.com/KevinGil12C)
+- GitHub: [@KevinGil12C](https://github.com/KevinGil12C)
 
 
 ---
