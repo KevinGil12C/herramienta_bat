@@ -19,10 +19,12 @@ echo 7.  Informacion del Sistema
 echo 8.  Opciones de Apagado
 echo 9.  Diagnostico DNS (nslookup)
 echo 10. Recursos de Red (net use)
-echo 11. TODAS las herramientas (rapido)
-echo 12. Salir
+echo 11. RENOVAR IP / Liberar y renovar DHCP
+echo 12. LIMPIAR CACHE DNS / Flush DNS
+echo 13. TODAS las herramientas (rapido)
+echo 14. Salir
 echo.
-set /p opcion="Seleccione opcion (1-12): "
+set /p opcion="Seleccione opcion (1-14): "
 
 if "%opcion%"=="1" goto ipconfig_fast
 if "%opcion%"=="2" goto ping_fast
@@ -34,8 +36,10 @@ if "%opcion%"=="7" goto systeminfo_fast
 if "%opcion%"=="8" goto shutdown_fast
 if "%opcion%"=="9" goto nslookup_fast
 if "%opcion%"=="10" goto netuse_fast
-if "%opcion%"=="11" goto todas_fast
-if "%opcion%"=="12" exit
+if "%opcion%"=="11" goto renew_ip
+if "%opcion%"=="12" goto flush_dns
+if "%opcion%"=="13" goto todas_fast
+if "%opcion%"=="14" exit
 goto menu
 
 :ipconfig_fast
@@ -163,6 +167,111 @@ if "%net%"=="3" (
     if not "%unidad%"=="" net use %unidad% /delete
     pause
 )
+goto menu
+
+:renew_ip
+cls
+echo ========== RENOVAR DIRECCION IP ==========
+echo.
+echo 1. Liberar y renovar IP (DHCP Release/Renew)
+echo 2. Solo liberar IP
+echo 3. Solo renovar IP
+echo 4. Ver IP actual antes/despues
+echo 5. Volver
+echo.
+set /p ip_opcion="Seleccione opcion: "
+
+if "%ip_opcion%"=="1" (
+    echo Liberando IP actual...
+    ipconfig /release
+    timeout /t 3 /nobreak > nul
+    echo Renovando IP nueva...
+    ipconfig /renew
+    echo.
+    echo IP renovada exitosamente!
+)
+
+if "%ip_opcion%"=="2" (
+    echo Liberando IP actual...
+    ipconfig /release
+    echo IP liberada. Necesitas renovarla para conectarte.
+)
+
+if "%ip_opcion%"=="3" (
+    echo Renovando IP...
+    ipconfig /renew
+    echo IP renovada.
+)
+
+if "%ip_opcion%"=="4" (
+    echo IP ANTES:
+    ipconfig | findstr /i "ipv4"
+    echo.
+    echo Liberando y renovando...
+    ipconfig /release > nul
+    timeout /t 2 /nobreak > nul
+    ipconfig /renew > nul
+    echo.
+    echo IP DESPUES:
+    ipconfig | findstr /i "ipv4"
+)
+
+if "%ip_opcion%"=="5" goto menu
+
+echo.
+pause
+goto menu
+
+:flush_dns
+cls
+echo ========== LIMPIAR CACHE DNS ==========
+echo.
+echo 1. Limpiar cache DNS completo (Flush DNS)
+echo 2. Registrar DNS de nuevo (Register DNS)
+echo 3. Limpiar y registrar
+echo 4. Mostrar cache DNS actual
+echo 5. Limpiar cache DNS de Chrome/Edge
+echo 6. Volver
+echo.
+set /p dns_opcion="Seleccione opcion: "
+
+if "%dns_opcion%"=="1" (
+    echo Limpiando cache DNS del sistema...
+    ipconfig /flushdns
+    echo Cache DNS limpiado!
+)
+
+if "%dns_opcion%"=="2" (
+    echo Registrando DNS nuevamente...
+    ipconfig /registerdns
+    echo DNS registrado!
+)
+
+if "%dns_opcion%"=="3" (
+    echo Limpiando cache DNS...
+    ipconfig /flushdns
+    echo Registrando DNS...
+    ipconfig /registerdns
+    echo Proceso completado!
+)
+
+if "%dns_opcion%"=="4" (
+    echo Cache DNS actual:
+    ipconfig /displaydns | more
+)
+
+if "%dns_opcion%"=="5" (
+    echo Limpiando cache DNS de navegadores...
+    echo Chrome/Edge...
+    del /f /s /q "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Cache\*" 2>nul
+    del /f /s /q "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Cache\*" 2>nul
+    echo Cache de navegadores limpiado!
+)
+
+if "%dns_opcion%"=="6" goto menu
+
+echo.
+pause
 goto menu
 
 :todas_fast
