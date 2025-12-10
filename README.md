@@ -34,7 +34,7 @@ Un script Batch para Windows que centraliza las herramientas de diagnóstico má
 
 1. **Clonar o descargar:**
    ```bash
-   git clone https://github.com/tuusuario/diagnostico-windows.git
+   git clone https://github.com/KevinGil12C/herramienta_bat.git
    ```
 
 2. **O descargar manualmente:**
